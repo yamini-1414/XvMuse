@@ -20,7 +20,7 @@ public protocol XvMuseDelegate:AnyObject {
     //didReceive object
     
     func didReceiveUpdate(from eeg:XvMuseEEG)
-    //func didReceive(eegPacket:XvMuseEEGPacket)
+    func didReceive(eegPacket:XvMuseEEGPacket)
     
     func didReceiveUpdate(from ppg:XvMusePPG)
     func didReceive(ppgHeartEvent:XvMusePPGHeartEvent)
@@ -226,7 +226,7 @@ public class XvMuse:MuseBluetoothObserver {
                     timestamp: timestamp,
                     samples: _parser.getEEGSamples(from: bytes))
 
-                //delegate?.didReceive(eegPacket: packet) //send to observer in case someone wants to do their own FFT processing
+                delegate?.didReceive(eegPacket: packet) //send to observer in case someone wants to do their own FFT processing
                 //if (i == 2) { print(bytes, ",") }
                 
                 return packet // return assembled packet
